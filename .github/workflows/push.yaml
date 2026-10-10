@@ -1,0 +1,17 @@
+name: golang-pipeline
+
+on: push
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    container: golang:1.27
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Run Until Tests
+        run: GOOS=linux GOARCH=amd64 go test
+
+      - name: Vet
+        run: |
+          go vet ./...
